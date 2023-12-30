@@ -29,6 +29,7 @@ def experiments():
             "title": experiment.title,
             "short_description": experiment.short_description,
             "description": experiment.description,
+            "category_list": [(category.id, category.name) for category in experiment.category_list],
             "item_list": [(item.id, item.name) for item in experiment.item_list],
             "youtube_link": experiment.youtube_link
         })
@@ -62,13 +63,22 @@ def search():
     with Session.begin() as session:
         # Get categories and items from GET request
         categories = request.args.getlist('category')
-        items = request.args.getlist('item')
+        items = [int(i) for i in request.args.getlist('item')]
         # Get experiments with given categories and items
         experiments = session.query(Experiments).filter(
             Experiments.category_list.any(Categories.id.in_(categories)),
-            # TODO: Fix for item_list is sublist of items 
-            Experiments.item_list.any(Items.id.in_(items))
         ).all()
+        # item_list is sublist of items 
+        exp_duplicate = experiments.copy()
+        # print(exp_duplicate)
+        # print(items)
+        # print(categories)
+        for exp in exp_duplicate:
+            for item in exp.item_list:
+                if item.id not in items:
+                    # print(exp.id, item.id)
+                    experiments.remove(exp)
+                    break
         return json.dumps({
             "experiment_list": [
                 {
