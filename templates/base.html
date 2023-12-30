@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang=en>
+
+    <!---------->
+    <!-- HEAD -->
+    <!---------->
+    <head>
+        <!-- Metadata -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" type="image/x-icon" href="./static/lib/icon/favicon.ico">
+        {% if title %}
+        <title> Eksperymentopol - {{ title }}</title>
+        {% else %}
+        <title> Eksperymentopol </title>
+        {% endif %}
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="./static/lib/bootstrap/bootstrap.min.css">
+        <link rel="stylesheet" href="./static/styles/main.css">
+
+        <!-- Scripts -->
+        <script src="./static/lib/bootstrap/bootstrap.bundle.min.js"></script>
+        <script src="./static/scripts/main.js"></script>
+    </head>
+
+    <!---------->
+    <!-- BODY -->
+    <!---------->
+    <body>
+        {% block content %}{% endblock %}
+    </body>
+</html>

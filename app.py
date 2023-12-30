@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 # from datetime import date
 from db_models import Categories, Items, Experiments, Base, engine, Session
 
@@ -6,7 +6,11 @@ import json
 
 application = Flask(__name__)
 
-@application.route('/backend/available_filters')
+@application.route('/')
+def index():
+    return render_template('index.html')
+
+@application.route('/api/available_filters')
 def available_filters():
     with Session.begin() as session:
         categories = session.query(Categories).all()
@@ -17,22 +21,23 @@ def available_filters():
         })
 
 # Return experiment with given id
-@application.route('/backend/experiments')
+@application.route('/experiment')
 def experiments():
     with Session.begin() as session:
         # Get id from GET request
         id = request.args.get('id')
         # Get experiment with given id
         experiment = session.query(Experiments).filter_by(id=id).first()
-        return json.dumps({
-            "id": experiment.id,
-            "title": experiment.title,
-            "short_description": experiment.short_description,
-            "description": experiment.description,
-            "category_list": [(category.id, category.name) for category in experiment.category_list],
-            "item_list": [(item.id, item.name) for item in experiment.item_list],
-            "youtube_link": experiment.youtube_link
-        })
+        print(experiment.item_list)
+
+        return render_template('experiment.html',
+                               title=experiment.title,
+                               experiment_title=experiment.title,
+                               experiment_short_description=experiment.short_description,
+                               experiment_description=experiment.description,
+                               experiment_category_list=experiment.category_list,
+                               experiment_item_list=experiment.item_list,
+                               experiment_youtube_link=experiment.youtube_link,)
 
 # /backend/search?category=2&category=3&category=12&item=21&item=32&item=1212&item=312&item=132
 # {
@@ -58,7 +63,7 @@ def experiments():
 #     ]
 # }
 
-@application.route('/backend/search')
+@application.route('/api/search')
 def search():
     with Session.begin() as session:
         # Get categories and items from GET request

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="experiment-container" class="container p-3">
+    <a href="/" class="btn btn-secondary float-end">Powrót</a>
+    <h1>{{ experiment_title }}</h1>
+    <p>{{ experiment_short_description }}</p>
+    <div class="ratio ratio-16x9 m-auto mb-3">
+        <iframe src="{{ experiment_youtube_link }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
+    <h2>Przedmioty</h2>
+    <ul>
+        {% for item in experiment_item_list %}
+            <li>{{ item.name }}</li>
+        {% endfor %}
+    </ul>
+    <h2>Opis</h2>
+    <p>{{ experiment_description }}</p>
+{% endblock %}

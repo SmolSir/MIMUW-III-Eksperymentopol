@@ -4,7 +4,7 @@
 
 const LOGGER = true;
 
-const FILTERS_ENDPOINT = "./backend/available_filters?";
+const FILTERS_ENDPOINT = "/api/available_filters";
 const EXPERIMENTS_ENDPOINT = "";
 
 function print(content) {
