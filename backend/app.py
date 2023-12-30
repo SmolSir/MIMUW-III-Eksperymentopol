@@ -68,7 +68,6 @@ def search():
         experiments = session.query(Experiments).filter(
             Experiments.category_list.any(Categories.id.in_(categories)),
         ).all()
-        # item_list is sublist of items
         exp_duplicate = experiments.copy()
         # print(exp_duplicate)
         # print(items)
