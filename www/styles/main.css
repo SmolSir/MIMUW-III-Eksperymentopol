@@ -5,3 +5,7 @@ a {
 #main-container {
     max-width: 1500px;
 }
+
+#experiment-container {
+    max-width: 1000px;
+}
