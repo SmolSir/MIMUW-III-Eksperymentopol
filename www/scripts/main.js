@@ -4,7 +4,7 @@
 
 const LOGGER = true;
 
-const FILTERS_ENDPOINT = "http://127.0.0.1:5000/backend/available_filters?";
+const FILTERS_ENDPOINT = "./backend/available_filters?";
 const EXPERIMENTS_ENDPOINT = "";
 
 function print(content) {
@@ -12,6 +12,11 @@ function print(content) {
         console.log(content);
     }
 }
+
+
+///////////////////////////////
+//   SINGLE ENTRY BUILDERS   //
+///////////////////////////////
 
 function buildCategoryInput(id, name, state) {
     const categoryInput = document.createElement("input");
@@ -39,6 +44,32 @@ function buildCategoryLabel(id, name, state) {
     return categoryLabel;
 }
 
+function buildItem(id, name, state) {
+    const item = document.createElement("div");
+    const itemInput = document.createElement("input");
+    const itemLabel = document.createElement("label");
+
+    itemInput.classList.add("form-check-input");
+    itemInput.type = "checkbox";
+    itemInput.value = "";
+    itemInput.id = "item_checkbox_" + id.toString();
+
+    itemLabel.classList.add("form-check-label");
+    itemLabel.setAttribute("for", "item_checkbox_" + id.toString());
+    itemLabel.textContent = name;
+
+    item.classList.add("form-check");
+    item.appendChild(itemInput);
+    item.appendChild(itemLabel);
+
+    return item;
+}
+
+
+/////////////////////////////
+//   LIST ENTRY BUILDERS   //
+/////////////////////////////
+
 function buildCategoryList(categoryRecords) {
     const categoryList = document.getElementById("category_list");
     var categoryChildrenList = [];
@@ -54,6 +85,22 @@ function buildCategoryList(categoryRecords) {
     categoryList.replaceChildren(...categoryChildrenList);
 }
 
+function buildItemList(itemRecords) {
+    const itemList = document.getElementById("item_list_not_checked");
+    var itemChildrenList = [];
+
+    for (const [id, name] of itemRecords) {
+        const item = buildItem(id, name, false);
+        itemChildrenList.push(item);
+    }
+
+    itemList.replaceChildren(...itemChildrenList);
+}
+
+
+/////////////////////////
+//   FETCH FUNCTIONS   //
+/////////////////////////
 async function fetchAvailableFilters() {
     var filters;
     var request = await fetch(
