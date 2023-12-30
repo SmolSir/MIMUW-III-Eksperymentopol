@@ -1,4 +1,4 @@
-*__pycache__/app.cpython-310.pyc
-*venv/*
-*.venv/*
+*__pycache__
+*venv
+*.venv
 *experiments.db
