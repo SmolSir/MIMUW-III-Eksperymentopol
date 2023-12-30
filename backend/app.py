@@ -15,7 +15,7 @@ def available_filters():
             "categories": [(category.id, category.name) for category in categories],
             "items": [(item.id, item.name) for item in items]
         })
-    
+
 # Return experiment with given id
 @application.route('/backend/experiments')
 def experiments():
@@ -33,7 +33,7 @@ def experiments():
             "item_list": [(item.id, item.name) for item in experiment.item_list],
             "youtube_link": experiment.youtube_link
         })
-    
+
 # /backend/search?category=2&category=3&category=12&item=21&item=32&item=1212&item=312&item=132
 # {
 #     "experiment_list": [
@@ -68,7 +68,6 @@ def search():
         experiments = session.query(Experiments).filter(
             Experiments.category_list.any(Categories.id.in_(categories)),
         ).all()
-        # item_list is sublist of items 
         exp_duplicate = experiments.copy()
         # print(exp_duplicate)
         # print(items)
