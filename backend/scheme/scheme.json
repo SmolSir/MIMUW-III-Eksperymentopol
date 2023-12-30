@@ -1,4 +1,4 @@
-/backend/experiments/69
+/backend/experiments?id=69 // z id
 {
     "title": "Experiment 1",
     "short_description": "This is the first experiment",
@@ -9,14 +9,14 @@
     "youtube_link": "https://www.youtube.com/watch?v=3QnD2c4Xovk",
 }
 
-/backend/available_filters
+/backend/available_filters // z id
 {
     "category_list": ["fizyka", "chemia", "sól"],
     "item_list": ["sól", "sól", "sól"],
 }
 
 [jakie kategorie, jakie przedmioty]
-/backend/search/???
+/backend/search?category=2&category=3&category=12&item=21&item=32&item=1212&item=312&item=132
 {
     "experiment_list": [
         {

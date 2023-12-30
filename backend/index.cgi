@@ -1,4 +1,4 @@
-# Run ./setup.sh for correct instalation
+#!/home/pitrek/JakubPiotrowicz/MIMUW-III-Eksperymentopol/backend/.venv/bin/python3
 
 from wsgiref.handlers import CGIHandler
 
