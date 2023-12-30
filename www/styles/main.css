@@ -1,3 +1,7 @@
 a {
     text-decoration: none;
 }
+
+#main-container {
+    max-width: 1500px;
+}
