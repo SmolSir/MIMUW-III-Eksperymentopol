@@ -2,32 +2,59 @@
 //   ENDPOINTS   //
 ///////////////////
 
-const FILTERS_ENDPOINT = "../../backend/available_filters";
+const LOGGER = true;
+
+const FILTERS_ENDPOINT = "http://127.0.0.1:5000/backend/available_filters?";
 const EXPERIMENTS_ENDPOINT = "";
 
-async function buildCategoryInput(id, name, state) {
-    const category_input = document.createElement("input");
-
-    category_input.type = "checkbox";
-    category_input.classList.add("btn-check");
-    category_input.id = "category_checkbox_" + id.toString();
-    category_input.autocomplete = "off";
-
-    return category_input;
+function print(content) {
+    if (LOGGER) {
+        console.log(content);
+    }
 }
 
-async function buildCategoryLabel(id, name, state) {
-    const category_label = document.createElement("label");
+function buildCategoryInput(id, name, state) {
+    const categoryInput = document.createElement("input");
 
-    category_label.classList.add("btn")
+    categoryInput.type = "checkbox";
+    categoryInput.classList.add("btn-check");
+    categoryInput.id = "category_checkbox_" + id.toString();
+    categoryInput.autocomplete = "off";
 
+    print(categoryInput);
+
+    return categoryInput;
 }
 
-async function buildCategoryList(categoryList) {
+function buildCategoryLabel(id, name, state) {
+    const categoryLabel = document.createElement("label");
+
+    categoryLabel.classList.add("btn");
+    categoryLabel.classList.add("btn-outline-primary");
+    categoryLabel.classList.add("flex-fill");
+    categoryLabel.classList.add("m-1");
+    categoryLabel.setAttribute("for", "category_checkbox_" + id.toString());
+    categoryLabel.textContent = name;
+
+    return categoryLabel;
+}
+
+function buildCategoryList(categoryRecords) {
     const categoryList = document.getElementById("category_list");
+    var categoryChildrenList = [];
+
+    for (const [id, name] of categoryRecords) {
+        const categoryInput = buildCategoryInput(id, name, false);
+        categoryChildrenList.push(categoryInput);
+
+        const categoryLabel = buildCategoryLabel(id, name, false);
+        categoryChildrenList.push(categoryLabel);
+    }
+
+    categoryList.replaceChildren(...categoryChildrenList);
 }
 
-async function fetchFilters() {
+async function fetchAvailableFilters() {
     var filters;
     var request = await fetch(
         FILTERS_ENDPOINT,
@@ -37,5 +64,8 @@ async function fetchFilters() {
     );
 
     filters = await request.json();
+
+    print(filters);
+
     return filters.error ? -1 : filters;
 }
