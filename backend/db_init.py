@@ -102,7 +102,7 @@ session = Session()
 # Number of items in Items table
 categories_count = session.query(Categories).count()
 
-# Add up to 3 random items from all items to each experiment
+# Add up to 3 random categories from all categories to each experiment
 for experiment in session.query(Experiments).all() :
     [n] = random.sample(range(1, min(3, categories_count)), 1)
     for i in random.sample(range(1, categories_count), n) :
