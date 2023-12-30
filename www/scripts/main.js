@@ -2,31 +2,40 @@
 //   ENDPOINTS   //
 ///////////////////
 
-const CATEGORY_LIST_ENDPOINT = "";
-const ITEM_LIST_ENDPOINT = "";
-const EXPERIMENT_LIST_ENDPOINT = "";
+const FILTERS_ENDPOINT = "../../backend/available_filters";
+const EXPERIMENTS_ENDPOINT = "";
 
-async function buildCategory(category, state) {
-    const category_button = document.createElement('button');
-    category_button.type = 'button';
-    category_button.classList.add('btn');
-    category_button.classList.add('btn-primary');
+async function buildCategoryInput(id, name, state) {
+    const category_input = document.createElement("input");
 
-    category_button.textContent = category;
-    category_button.disabled = state;
+    category_input.type = "checkbox";
+    category_input.classList.add("btn-check");
+    category_input.id = "category_checkbox_" + id.toString();
+    category_input.autocomplete = "off";
 
-    return category_button;
+    return category_input;
 }
 
-async function fetchCategoryList() {
-    var category_list;
+async function buildCategoryLabel(id, name, state) {
+    const category_label = document.createElement("label");
+
+    category_label.classList.add("btn")
+
+}
+
+async function buildCategoryList(categoryList) {
+    const categoryList = document.getElementById("category_list");
+}
+
+async function fetchFilters() {
+    var filters;
     var request = await fetch(
-        CATEGORY_LIST_ENDPOINT,
+        FILTERS_ENDPOINT,
         {
-            method: 'GET'
+            method: "GET"
         }
     );
 
-    category_list = await request.json();
-    return category_list.error ? -1 : category_list;
+    filters = await request.json();
+    return filters.error ? -1 : filters;
 }
