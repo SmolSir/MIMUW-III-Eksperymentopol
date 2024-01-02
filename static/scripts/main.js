@@ -14,6 +14,38 @@ function print(content) {
 }
 
 
+/////////////////////////
+//   FETCH FUNCTIONS   //
+/////////////////////////
+async function fetchAvailableFilters() {
+    var filters;
+    var request = await fetch(
+        FILTERS_ENDPOINT,
+        {
+            method: "GET"
+        }
+    );
+
+    filters = await request.json();
+
+    print(filters);
+
+    return filters.error ? -1 : filters;
+}
+
+
+//////////////////////////////
+//   COMPARISON FUNCTIONS   //
+//////////////////////////////
+
+function compareItems(itemA, itemB) {
+    var itemLabelA = itemA.querySelector('label').textContent;
+    var itemLabelB = itemB.querySelector('label').textContent;
+
+    return itemLabelA.localeCompare(itemLabelB);
+}
+
+
 ///////////////////////////////
 //   SINGLE ENTRY BUILDERS   //
 ///////////////////////////////
@@ -98,21 +130,35 @@ function buildItemList(itemRecords) {
 }
 
 
-/////////////////////////
-//   FETCH FUNCTIONS   //
-/////////////////////////
-async function fetchAvailableFilters() {
-    var filters;
-    var request = await fetch(
-        FILTERS_ENDPOINT,
-        {
-            method: "GET"
-        }
-    );
+//////////////////////////
+//   ITEM LIST UPDATE   //
+//////////////////////////
 
-    filters = await request.json();
+function updateItemList() {
 
-    print(filters);
+    function deepClone(node) {
+        return node.cloneNode(true);
+    }
 
-    return filters.error ? -1 : filters;
+    function itemChecked(node) {
+        var checkbox = node.querySelector('input[type="checkbox"]');
+        return checkbox && checkbox.checked;
+    }
+
+    function itemNotChecked(node) {
+        var checkbox = node.querySelector('input[type="checkbox"]');
+        return checkbox && !checkbox.checked;
+    }
+
+    const itemListChecked = document.getElementById("item_list_checked");
+    const itemListNotChecked = document.getElementById("item_list_not_checked");
+
+    const itemList =
+        Array.from(itemListChecked.children).concat(Array.from(itemListNotChecked.children));
+
+    const itemListCheckedUpdate = itemList.map(deepClone).filter(itemChecked).sort(compareItems);
+    const itemListNotCheckedUpdate = itemList.map(deepClone).filter(itemNotChecked).sort(compareItems);
+
+    itemListChecked.replaceChildren(...itemListCheckedUpdate);
+    itemListNotChecked.replaceChildren(...itemListNotCheckedUpdate);
 }
