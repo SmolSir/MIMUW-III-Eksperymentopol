@@ -25,7 +25,12 @@
 
             <div class="mb-3">
                 <h5>Przedmioty</h5>
-                <input class="form-control mb-2" type="text" placeholder="szukaj przedmiotów...">
+                <input class="form-control mb-2" type="text" placeholder="szukaj przedmiotów..." id="item_search" list="item_search_suggestion_list">
+                <datalist id="item_search_suggestion_list">
+                    <option value="sól"></option>
+                    <option value="pieprz"></option>
+                    <option value="mąka"></option>
+                </datalist>
                 <div id="item_list_checked">
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="item_id_1">
@@ -66,7 +71,7 @@
 
         <!-- the rest of the width for main content -->
         <div class="col">
-            <div id="experiments-list">
+            <div id="experiment_list">
                 <div class="experiments-list-item mb-3">
                     <div class="row position-relative">
                         <div class="col-lg-4 col-md-5 col-md">
