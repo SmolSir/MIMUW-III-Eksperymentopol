@@ -163,10 +163,11 @@ itemSearchInput.addEventListener('change', function(event) {
     // Failed to mark item as checked
 })
 
-var experimentSearchButton = document.getElementById("experiment_search_button");
+var experimentSearchApplyButton = document.getElementById("experiment_search_apply_button");
+var experimentSearchResetButton = document.getElementById("experiment_search_reset_button");
 
-experimentSearchButton.addEventListener('click', updateExperimentList);
-
+experimentSearchApplyButton.addEventListener('click', updateExperimentList);
+experimentSearchResetButton.addEventListener('click', resetExperimentList);
 
 ///////////////////////////////
 //   SINGLE ENTRY BUILDERS   //
@@ -400,4 +401,17 @@ function updateExperimentList() {
     const query = buildExperimentsQuery(categoryIdList, itemIdList);
 
     window.location.href = originUrl.href + query;
+}
+
+function resetExperimentList() {
+    document.querySelectorAll('#category_list input[type="checkbox"]')
+        .forEach(checkbox => checkbox.checked = false);
+
+    document.querySelectorAll('#item_list_checked input[type="checkbox"]')
+        .forEach(checkbox => checkbox.checked = false);
+
+    document.querySelectorAll('#item_list_not_checked input[type="checkbox"]')
+       .forEach(checkbox => checkbox.checked = false);
+
+    updateExperimentList();
 }
