@@ -82,7 +82,6 @@ async function fetchData(request) {
 ///////////////////////////////
 
 window.onload = async function init() {
-    var originUrl = new URL(window.location.origin);
     var currentUrl = new URL(window.location.href);
 
     await fetchData(FILTERS_ENDPOINT)
@@ -98,24 +97,8 @@ window.onload = async function init() {
             console.error("Failed to fetch data: ", error);
         });
 
-    var experimentsRequest = "";
-
-    // If there are some search parameters in the URL, use them
-    if (originUrl.href !== currentUrl.href) {
-        experimentsRequest = EXPERIMENTS_ENDPOINT + "?" + currentUrl.searchParams.toString();
-        processExperimentsQuery(currentUrl.searchParams);
-    }
-    else { // if there are none, just load everything
-        const categoryIdList = Array
-            .from(document.querySelectorAll('#category_list input[type="checkbox"]'))
-            .map(category => category.id);
-
-        const itemIdList = Array
-            .from(document.querySelectorAll('#item_list_not_checked input[type="checkbox"]'))
-            .map(item => item.id);
-
-            experimentsRequest = EXPERIMENTS_ENDPOINT + buildExperimentsQuery(categoryIdList, itemIdList);
-    }
+    var experimentsRequest = EXPERIMENTS_ENDPOINT + "?" + currentUrl.searchParams.toString();
+    processExperimentsQuery(currentUrl.searchParams);
 
     await fetchData(experimentsRequest)
         .then(experimentsJson => {
