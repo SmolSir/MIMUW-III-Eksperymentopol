@@ -56,12 +56,8 @@ function processExperimentsQuery(urlSearchParams) {
     const categoryIdList = getIdListByKey(urlSearchParams, "category");
     const itemIdList = getIdListByKey(urlSearchParams, "item");
 
-    console.log(categoryIdList);
-    console.log(itemIdList);
-
-    categoryIdList.forEach(id => {
-        console.log(document.getElementById(`category_checkbox_${id}`));
-        document.getElementById(`category_checkbox_${id}`).checked = true});
+    categoryIdList.forEach(id =>
+        document.getElementById(`category_checkbox_${id}`).checked = true);
 
     itemIdList.forEach(id =>
         document.getElementById(`item_checkbox_${id}`).checked = true);
@@ -103,9 +99,6 @@ window.onload = async function init() {
         });
 
     var experimentsRequest = "";
-
-    console.log(originUrl.href);
-    console.log(currentUrl.href);
 
     // If there are some search parameters in the URL, use them
     if (originUrl.href !== currentUrl.href) {
