@@ -70,16 +70,20 @@ def search():
         categories = request.args.getlist('category')
         items = [int(i) for i in request.args.getlist('item')]
         # Get experiments with given categories and items
-        experiments = session.query(Experiments).filter(
-            Experiments.category_list.any(Categories.id.in_(categories)),
-        ).all()
+        experiments = None
+        if categories:
+            experiments = session.query(Experiments).filter(
+                Experiments.category_list.any(Categories.id.in_(categories)),
+                ).all()
+        else:
+            experiments = session.query(Experiments).all()
         exp_duplicate = experiments.copy()
         # print(exp_duplicate)
         # print(items)
         # print(categories)
         for exp in exp_duplicate:
             for item in exp.item_list:
-                if item.id not in items:
+                if items and item.id not in items:
                     # print(exp.id, item.id)
                     experiments.remove(exp)
                     break
