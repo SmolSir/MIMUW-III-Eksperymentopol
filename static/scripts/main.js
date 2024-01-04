@@ -2,31 +2,29 @@
 //   ENDPOINTS   //
 ///////////////////
 
-const LOGGER = true;
-
 const ENDPOINT_PREFIX = "/api";
 const FILTERS_ENDPOINT = ENDPOINT_PREFIX + "/available_filters";
 const EXPERIMENTS_ENDPOINT = ENDPOINT_PREFIX + "/search";
 
-function print(content) {
-    if (LOGGER) {
-        console.log(content);
-    }
+
+//////////////////////////
+//   HELPER FUNCTIONS   //
+//////////////////////////
+
+function compareByNth(A, B, n) {
+    return A[n - 1].localeCompare(B[n - 1]);
+}
+
+function compareByField(A, B, field) {
+    return A[field].localeCompare(B[field]);
 }
 
 
 /////////////////////////
-//   FETCH FUNCTIONS   //
+//   QUERY FUNCTIONS   //
 /////////////////////////
 
-async function fetchAvailableFilters() {
-    return fetch(FILTERS_ENDPOINT, { method: "GET" })
-        .then(response => response.json())
-        .catch(error => Promise.reject(error));
-}
-
-async function fetchAvailableExperiments(categoryIdList, itemIdList) {
-
+function buildExperimentsQuery(categoryIdList, itemIdList) {
     function extractCategoryId(string) {
         return "category" + "=" + string.match(/\d+$/)[0];
     }
@@ -36,14 +34,48 @@ async function fetchAvailableExperiments(categoryIdList, itemIdList) {
     }
 
     const querySeparator = "&";
-    const queryEntry = "?";
 
     var categoriesQuery = categoryIdList.map(extractCategoryId).join(querySeparator);
     var itemsQuery = itemIdList.map(extractItemId).join(querySeparator);
 
-    const query = EXPERIMENTS_ENDPOINT + queryEntry + categoriesQuery + querySeparator + itemsQuery;
+    const queryEntry = categoriesQuery || itemsQuery ? "?" : "";
 
-    return fetch(query, { method: "GET" })
+    const query = queryEntry + categoriesQuery + querySeparator + itemsQuery;
+
+    return query.replace(/&+$/, ""); // Remove trailing &s
+}
+
+function processExperimentsQuery(urlSearchParams) {
+    function getIdListByKey(params, key) {
+        return params
+            .getAll(key)
+            .map(value => parseInt(value))
+            .filter(value => !isNaN(value));
+    }
+
+    const categoryIdList = getIdListByKey(urlSearchParams, "category");
+    const itemIdList = getIdListByKey(urlSearchParams, "item");
+
+    console.log(categoryIdList);
+    console.log(itemIdList);
+
+    categoryIdList.forEach(id => {
+        console.log(document.getElementById(`category_checkbox_${id}`));
+        document.getElementById(`category_checkbox_${id}`).checked = true});
+
+    itemIdList.forEach(id =>
+        document.getElementById(`item_checkbox_${id}`).checked = true);
+
+    updateItemList();
+}
+
+
+/////////////////////////
+//   FETCH FUNCTION   //
+/////////////////////////
+
+async function fetchData(request) {
+    return fetch(request, { method: "GET" })
         .then(response => response.json())
         .catch(error => Promise.reject(error));
 }
@@ -53,17 +85,11 @@ async function fetchAvailableExperiments(categoryIdList, itemIdList) {
 //   INTERACTIVE FUNCTIONS   //
 ///////////////////////////////
 
-window.onload = function init() {
+window.onload = async function init() {
+    var originUrl = new URL(window.location.origin);
+    var currentUrl = new URL(window.location.href);
 
-    function compareByNth(A, B, n) {
-        return A[n - 1].localeCompare(B[n - 1]);
-    }
-
-    function compareByField(A, B, field) {
-        return A[field].localeCompare(B[field]);
-    }
-
-    fetchAvailableFilters()
+    await fetchData(FILTERS_ENDPOINT)
         .then(({ categories, items }) => {
             categories.sort((categoryA, categoryB) => compareByNth(categoryA, categoryB, 2));
             items.sort((itemA, itemB) => compareByNth(itemA, itemB, 2));
@@ -76,15 +102,29 @@ window.onload = function init() {
             console.error("Failed to fetch data: ", error);
         });
 
-    const categoryIdList = Array
-        .from(document.querySelectorAll('#category_list input[type="checkbox"]'))
-        .map(category => category.id);
+    var experimentsRequest = "";
 
-    const itemIdList = Array
-        .from(document.querySelectorAll('#item_list_not_checked input[type="checkbox"]'))
-        .map(item => item.id);
+    console.log(originUrl.href);
+    console.log(currentUrl.href);
 
-    fetchAvailableExperiments(categoryIdList, itemIdList)
+    // If there are some search parameters in the URL, use them
+    if (originUrl.href !== currentUrl.href) {
+        experimentsRequest = EXPERIMENTS_ENDPOINT + "?" + currentUrl.searchParams.toString();
+        processExperimentsQuery(currentUrl.searchParams);
+    }
+    else { // if there are none, just load everything
+        const categoryIdList = Array
+            .from(document.querySelectorAll('#category_list input[type="checkbox"]'))
+            .map(category => category.id);
+
+        const itemIdList = Array
+            .from(document.querySelectorAll('#item_list_not_checked input[type="checkbox"]'))
+            .map(item => item.id);
+
+            experimentsRequest = EXPERIMENTS_ENDPOINT + buildExperimentsQuery(categoryIdList, itemIdList);
+    }
+
+    await fetchData(experimentsRequest)
         .then(experimentsJson => {
             var experiments = experimentsJson.experiment_list;
 
@@ -100,7 +140,6 @@ window.onload = function init() {
 }
 
 function markItemChecked(item) {
-
     function markItemCheckbox(itemCheckbox) {
         var checkbox = itemCheckbox.querySelector('.form-check-input');
         var label = itemCheckbox.querySelector('.form-check-label');
@@ -148,6 +187,10 @@ itemSearchInput.addEventListener('change', function(event) {
     // Failed to mark item as checked
 })
 
+var experimentSearchButton = document.getElementById("experiment_search_button");
+
+experimentSearchButton.addEventListener('click', updateExperimentList);
+
 
 ///////////////////////////////
 //   SINGLE ENTRY BUILDERS   //
@@ -160,8 +203,6 @@ function buildCategoryInput(id, name, state) {
     categoryInput.classList.add("btn-check");
     categoryInput.id = "category_checkbox_" + id.toString();
     categoryInput.autocomplete = "off";
-
-    print(categoryInput);
 
     return categoryInput;
 }
@@ -319,7 +360,7 @@ function buildExperimentList(experimentRecords) {
         experimentChildrenList.push(experiment);
     }
 
-    experimentList.append(...experimentChildrenList);
+    experimentList.replaceChildren(...experimentChildrenList);
 }
 
 
@@ -328,7 +369,6 @@ function buildExperimentList(experimentRecords) {
 //////////////////////////
 
 function updateItemList() {
-
     function deepClone(node) {
         return node.cloneNode(true);
     }
@@ -361,4 +401,27 @@ function updateItemList() {
 
     itemListChecked.replaceChildren(...itemListCheckedUpdate);
     itemListNotChecked.replaceChildren(...itemListNotCheckedUpdate);
+}
+
+
+////////////////////////////////
+//   EXPERIMENT LIST UPDATE   //
+////////////////////////////////
+
+function updateExperimentList() {
+    const originUrl = new URL(window.location.origin);
+
+    updateItemList();
+
+    const categoryIdList = Array
+        .from(document.querySelectorAll('#category_list input[type="checkbox"]:checked'))
+        .map(category => category.id);
+
+    const itemIdList = Array
+        .from(document.querySelectorAll('#item_list_checked input[type="checkbox"]:checked'))
+        .map(item => item.id);
+
+    const query = buildExperimentsQuery(categoryIdList, itemIdList);
+
+    window.location.href = originUrl.href + query;
 }
