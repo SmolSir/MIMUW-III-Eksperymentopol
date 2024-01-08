@@ -145,8 +145,8 @@ function markItemChecked(item) {
 
 var itemSearchInput = document.getElementById("item_search");
 
-itemSearchInput.addEventListener('input', function(event) {
-    if (event.inputType === 'insertText' && event.data === '\n') {
+itemSearchInput.addEventListener('keyup', function(event) {
+    if (event.key === 'Enter') {
         if (markItemChecked(itemSearchInput.value.trim())) {
             // Successfully marked item as checked
             itemSearchInput.value = "";
