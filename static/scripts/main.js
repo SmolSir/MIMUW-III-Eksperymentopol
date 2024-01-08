@@ -120,7 +120,7 @@ function markItemChecked(item) {
         var checkbox = itemCheckbox.querySelector('.form-check-input');
         var label = itemCheckbox.querySelector('.form-check-label');
 
-        if (label.textContent.trim() === item) {
+        if (label.textContent.trim().localeCompare(item, undefined, { sensitivity: accent })) {
             checkbox.checked = true;
             return true;
         }
