@@ -385,7 +385,7 @@ function updateItemList() {
 //   EXPERIMENT LIST UPDATE   //
 ////////////////////////////////
 
-function updateExperimentList() {
+async function updateExperimentList() {
     const originUrl = new URL(window.location.origin);
 
     updateItemList();
@@ -400,7 +400,23 @@ function updateExperimentList() {
 
     const query = buildExperimentsQuery(categoryIdList, itemIdList);
 
-    window.location.href = originUrl.href + query;
+    var experimentsRequest = EXPERIMENTS_ENDPOINT + query;
+
+    await fetchData(experimentsRequest)
+        .then(experimentsJson => {
+            var experiments = experimentsJson.experiment_list;
+
+            experiments.sort(
+                (experimentA, experimentB) => compareByField(experimentA, experimentB, "title")
+            );
+
+            buildExperimentList(experiments);
+        })
+        .catch(error => {
+            console.error("Failed to fetch data: ", error);
+        });
+
+    window.history.replaceState(null, null, originUrl.href + query);
 }
 
 function resetExperimentList() {
