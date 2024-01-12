@@ -33,22 +33,22 @@ with open("experiments.json") as f:
 
     session = Session()
     for category in categories:
-        session.add(Categories(name=category))
+        session.add(Category(name=category))
     for item in items:
-        session.add(Items(name=item))
+        session.add(Item(name=item))
     session.commit()
 
     for experiment in experiments:
         session.add(
-            Experiments(
+            Experiment(
                 title=experiment["title"],
                 short_description=experiment["description"],
                 description=lorem_ipsum,
-                category_list=session.query(Categories)
-                .filter(Categories.name.in_((experiment["category"],)))
+                category_list=session.query(Category)
+                .filter(Category.name.in_((experiment["category"],)))
                 .all(),
-                item_list=session.query(Items)
-                .filter(Items.name.in_(experiment["items"]))
+                item_list=session.query(Item)
+                .filter(Item.name.in_(experiment["items"]))
                 .all(),
                 youtube_link=youtube_link,
             )

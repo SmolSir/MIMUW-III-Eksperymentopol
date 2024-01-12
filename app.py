@@ -1,7 +1,7 @@
 from flask import Flask, request, render_template
 from markupsafe import Markup
 # from datetime import date
-from db_models import Categories, Items, Experiments, Base, engine, Session
+from db_models import Category, Item, Experiment, Base, engine, Session
 
 import json
 
@@ -14,8 +14,8 @@ def index():
 @application.route('/api/available_filters')
 def available_filters():
     with Session.begin() as session:
-        categories = session.query(Categories).all()
-        items = session.query(Items).all()
+        categories = session.query(Category).all()
+        items = session.query(Item).all()
         return json.dumps({
             "categories": [(category.id, category.name) for category in categories],
             "items": [(item.id, item.name) for item in items]
@@ -28,7 +28,7 @@ def experiments():
         # Get id from GET request
         id = request.args.get('id')
         # Get experiment with given id
-        experiment = session.query(Experiments).filter_by(id=id).first()
+        experiment = session.query(Experiment).filter_by(id=id).first()
         print(experiment.item_list)
 
         return render_template('experiment.html',
@@ -73,11 +73,11 @@ def search():
         # Get experiments with given categories and items
         experiments = None
         if categories:
-            experiments = session.query(Experiments).filter(
-                Experiments.category_list.any(Categories.id.in_(categories)),
+            experiments = session.query(Experiment).filter(
+                Experiment.category_list.any(Category.id.in_(categories)),
                 ).all()
         else:
-            experiments = session.query(Experiments).all()
+            experiments = session.query(Experiment).all()
         exp_duplicate = experiments.copy()
         # print(exp_duplicate)
         # print(items)
