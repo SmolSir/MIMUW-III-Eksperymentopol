@@ -337,6 +337,12 @@ function buildExperimentList(experimentRecords) {
         experimentChildrenList.push(experiment);
     }
 
+    if (experimentRecords.length === 0) {
+        const noResults = document.createElement("p");
+        noResults.textContent = "Nie znaleziono eksperymentów spełniających podane kryteria.";
+        experimentChildrenList.push(noResults);
+    }
+
     experimentList.replaceChildren(...experimentChildrenList);
 }
 
