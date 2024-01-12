@@ -1,4 +1,5 @@
 from flask import Flask, request, render_template
+from markupsafe import Markup
 # from datetime import date
 from db_models import Categories, Items, Experiments, Base, engine, Session
 
@@ -34,7 +35,7 @@ def experiments():
                                title=experiment.title,
                                experiment_title=experiment.title,
                                experiment_short_description=experiment.short_description,
-                               experiment_description=experiment.description,
+                               experiment_description=Markup(experiment.description),
                                experiment_category_list=experiment.category_list,
                                experiment_item_list=experiment.item_list,
                                experiment_youtube_link=experiment.youtube_link,)
@@ -93,7 +94,7 @@ def search():
                     "id": experiment.id,
                     "title": experiment.title,
                     "short_description": experiment.short_description,
-                    "image_path": f"/static/experiment_images/{experiment.id}.png",
+                    "image_path": f"/static/experiment_images/{experiment.id}.jpg",
                 } for experiment in experiments
             ]
         })

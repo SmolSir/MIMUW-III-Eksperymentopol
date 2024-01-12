@@ -1,0 +1,214 @@
+{
+    "experiments": [
+      {
+        "title": "Eksploracja magnesów",
+        "description": "Badaj różne przedmioty i sprawdź, które z nich są przyciągane przez magnes. Zastanów się, dlaczego tak się dzieje.",
+        "category": "Nauka przyrody",
+        "items": ["magnes"]
+      },
+      {
+        "title": "Eksplozja kolorów",
+        "description": "Zrób eksperyment z mieszaniem barwników spożywczych w wodzie i obserwuj, jak powstają nowe kolory. Odkryj tajniki mieszania barw.",
+        "category": "Kreatywność",
+        "items": ["barwniki spożywcze", "miska"]
+      },
+      {
+        "title": "Wulkan chemiczny",
+        "description": "Przeprowadź eksperyment, w którym za pomocą prostych składników stworzysz mini-wulkan. Obserwuj reakcję chemiczną i efekty wulkanu.",
+        "category": "Chemia",
+        "items": ["soda oczyszczona", "ocet", "płyn do naczyń", "barwniki spożywcze"]
+      },
+      {
+        "title": "Budowanie mostów z makaronu",
+        "description": "Spróbuj zbudować most z suchego makaronu i kleju. Testuj, jakie kształty i konstrukcje są najbardziej stabilne.",
+        "category": "Fizyka",
+        "items": ["makaron suchy", "klej", "nożyczki"]
+      },
+      {
+        "title": "Gra światła i cienia",
+        "description": "Stworzysz teatrzyk cieni za pomocą lampy i kartonu. Zaprojektuj postacie, a następnie opowiedzcie historię poprzez ruchy postaci i ich cienie.",
+        "category": "Kreatywność",
+        "items": ["karton", "nożyczki", "latarka"]
+      },
+      {
+        "title": "Woda, olej i barwniki",
+        "description": "Zobacz, co się stanie, gdy połączysz wodę, olej i barwniki spożywcze. Obserwuj, jak się oddzielają i jak tworzą interesujące wzory.",
+        "category": "Nauka przyrody",
+        "items": ["olej", "barwniki spożywcze"]
+      },
+      {
+        "title": "Rakietowa zabawa",
+        "description": "Zbuduj prostą rakietę na bazie butelki PET i octu. Zobacz, jak wysoko twoja rakietka może wzlecieć po reakcji chemicznej.",
+        "category": "Fizyka",
+        "items": ["butelka plastikowa", "ocet", "proszek do pieczenia"]
+      },
+      {
+        "title": "Gliniane rzeźby",
+        "description": "Stwórz małe rzeźby z plastycznej gliny. Wyobraź sobie postacie, zwierzęta lub przedmioty i podziel się swoją sztuką.",
+        "category": "Kreatywność",
+        "items": ["plastyczna glina"]
+      },
+      {
+        "title": "Kierunek kompasu",
+        "description": "Wykorzystaj kompas do zorientowania się w kierunkach geograficznych. Spróbuj znaleźć różne punkty i stwórz prostą mapę z użyciem kompasu.",
+        "category": "Nauka przyrody",
+        "items": ["kompas"]
+      },
+      {
+        "title": "Bąbelkowy świat",
+        "description": "Stwórz fajerwerki bąbelków za pomocą różnych narzędzi do tworzenia bąbli.",
+        "category": "Chemia",
+        "items": ["płyn do naczyń", "patyczki do waty"]
+      },
+      {
+        "title": "Wulkan w szklance",
+        "description": "Zasymuluj erupcję wulkanu w szklance, używając prostych składników domowych.",
+        "category": "Nauka przyrody",
+        "items": ["soda oczyszczona", "ocet", "barwniki spożywcze"]
+      },
+      {
+        "title": "Przygoda z magnesem",
+        "description": "Eksperymentuj z magnesem, odkrywając jego właściwości przyciągania i odpychania.",
+        "category": "Fizyka",
+        "items": ["magnes"]
+      },
+      {
+        "title": "Farbowa eksplozja",
+        "description": "Zobacz, jak reagują ze sobą składniki w domowy sposób w formie kolorowej eksplozji.",
+        "category": "Chemia",
+        "items": ["ocet", "soda oczyszczona", "barwniki spożywcze"]
+      },
+      {
+        "title": "Budowanie rakiety z balonów",
+        "description": "Skonstruuj własną rakietę przy użyciu balonów, papieru i taśmy klejącej.",
+        "category": "Fizyka",
+        "items": ["balony", "taśma klejąca"]
+      },
+      {
+        "title": "Odkrywanie tajemniczych barw",
+        "description": "Stwórz swoje własne barwy, mieszając podstawowe kolory i obserwuj efekty.",
+        "category": "Kreatywność",
+        "items": ["farby plakatowe", "pędzle"]
+      },
+      {
+        "title": "Zegar słoneczny",
+        "description": "Zbuduj prosty zegar słoneczny i zrozum, jak słońce wpływa na oznaczanie czasu.",
+        "category": "Astronomia",
+        "items": ["drewniane patyczki", "klej", "zegar"]
+      },
+      {
+        "title": "Eksperyment z cieniem",
+        "description": "Zbadaj, jak zmienia się cień w zależności od źródła światła i obiektu.",
+        "category": "Fizyka",
+        "items": ["latarka"]
+      },
+      {
+        "title": "Wodny wir",
+        "description": "Stwórz wir w wodzie, badając, jak ruchy powietrza wpływają na płyn.",
+        "category": "Fizyka",
+        "items": ["butelka plastikowa", "barwniki spożywcze"]
+      },
+      {
+        "title": "Latające balony",
+        "description": "Stwórz reakcję chemiczną, która wypełni balony gazem. Obserwuj, jak balony unoszą się i eksperymentuj z różnymi proporcjami składników.",
+        "category": "Chemia",
+        "items": ["ocet", "soda oczyszczona", "balony", "butelka plastikowa"]
+      },
+      {
+        "title": "Robaki w glebie",
+        "description": "Przeprowadź eksperyment z badaniem gleby. Zbierz próbki z różnych miejsc i odkryj, jakie mikroorganizmy żyją w glebie.",
+        "category": "Nauka przyrody",
+        "items": ["słoik", "gleba"]
+      },
+      {
+        "title": "Słoneczne kolaże",
+        "description": "Wykorzystaj naturalne światło słoneczne do stworzenia kolaży. Zbierz rośliny, liście i inne przedmioty, aby stworzyć unikalne obrazy na papierze.",
+        "category": "Kreatywność",
+        "items": ["liście", "klej"]
+      },
+      {
+        "title": "Mapa skarbów",
+        "description": "Zaprojektuj mapę skarbów i ukryj skarby w ogrodzie lub domu. Pozwól dzieciom używać kompasów do znalezienia ukrytych skarbów.",
+        "category": "Nauka przyrody",
+        "items": ["kompas"]
+      },
+      {
+        "title": "Błyszczące kryształy",
+        "description": "Zrób kryształy za pomocą roztworu soli i wody. Obserwuj, jak kryształy powoli rosną na powierzchni różnych przedmiotów.",
+        "category": "Chemia",
+        "items": ["sól", "słoik", "drewniane patyczki"]
+      },
+      {
+        "title": "Zabawa z odbiciami",
+        "description": "Stwórz prostą zabawę z odbiciami świetlnymi. Użyj luster i latarki, aby zobaczyć, jak światło odbija się od różnych powierzchni.",
+        "category": "Fizyka",
+        "items": ["lusterka", "latarka"]
+      },
+      {
+        "title": "Ekosystem w słoiku",
+        "description": "Zbuduj mini-ekosystem w słoiku, używając gleby, roślin i małych zwierząt. Obserwuj, jak te elementy współdziałają ze sobą.",
+        "category": "Nauka przyrody",
+        "items": ["słoik", "gleba"]
+      },
+      {
+        "title": "Budowanie rakiety wodnej",
+        "description": "Zbuduj rakietę, która jest napędzana wodą i powietrzem. Przeprowadź testy, aby zobaczyć, jak wysoko rakietka może wzlecieć.",
+        "category": "Fizyka",
+        "items": ["butelka plastikowa"]
+      },
+      {
+        "title": "Malowanie lodem",
+        "description": "Stwórz farby lodowe, zamrażając wodne mieszanki z barwnikami. Maluj na papierze, gdy lody zaczną się topić.",
+        "category": "Kreatywność",
+        "items": ["barwniki spożywcze", "foremki do lodu"]
+      },
+      {
+        "title": "Nauka o grawitacji",
+        "description": "Przeprowadź eksperyment z ruchem obrotowym, przekręcając naczynie z wodą do góry nogami. Zobacz, jak woda utrzymuje się wewnątrz naczynia.",
+        "category": "Fizyka",
+        "items": ["miska"]
+      },
+      {
+        "title": "Podwodne miasta",
+        "description": "Zbuduj podwodne miasto z klocków LEGO i zobacz, jak różne przedmioty zachowują się pod wodą. Eksperymentuj z pływalnością.",
+        "category": "Fizyka",
+        "items": ["klocki LEGO", "miska"]
+      },
+      {
+        "title": "Głośność dźwięku",
+        "description": "Zbuduj prosty instrument muzyczny, takie jak flet z rurki. Eksperymentuj z długościami rurek, aby zmienić wysokość dźwięków.",
+        "category": "Kreatywność",
+        "items": ["rurka PCV", "nożyczki", "taśma klejąca"]
+      },
+      {
+        "title": "Piaskowa rzeźba",
+        "description": "Stwórz rzeźby z piasku na plaży lub w pudełku z piaskiem. Eksperymentuj z różnymi narzędziami do formowania piasku.",
+        "category": "Kreatywność",
+        "items": ["piasek"]
+      },
+      {
+        "title": "Świecące rakiety",
+        "description": "Wykorzystaj reakcję chemiczną, aby zrobić rakiety świecące w nocy. Obserwuj, jak pigmenty świetlne migoczą w ciemności.",
+        "category": "Chemia",
+        "items": ["proszek fosforyzujący", "butelka plastikowa", "ocet"]
+      },
+      {
+        "title": "Symulacja trzęsienia ziemi",
+        "description": "Zbuduj model trzęsienia ziemi, używając suchego ciasta do modelowania. Obserwuj, jak różne struktury reagują na wibracje.",
+        "category": "Nauka przyrody",
+        "items": ["suche ciasto do modelowania"]
+      },
+      {
+        "title": "Sensoryczny zegar piaskowy",
+        "description": "Zbuduj zegar piaskowy używając butelek i piasku o różnych kolorach. Obserwuj, jak piasek przemieszcza się w czasie.",
+        "category": "Fizyka",
+        "items": ["butelka plastikowa", "piasek"]
+      },
+      {
+        "title": "Eksperymenty z optyką",
+        "description": "Zbuduj prosty teatrzyk optyczny, używając jednej lub kilku soczewek. Eksperymentuj z projekcjami i powiększeniem obrazów.",
+        "category": "Fizyka",
+        "items": ["soczewki", "karton", "latarka"]
+      }
+    ]
+  }
