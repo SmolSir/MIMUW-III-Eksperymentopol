@@ -1,6 +1,5 @@
 from flask import Flask, request, render_template
 from markupsafe import Markup
-# from datetime import date
 from db_models import Category, Item, Experiment, Base, engine, Session
 
 import json
@@ -21,13 +20,10 @@ def available_filters():
             "items": [(item.id, item.name) for item in items]
         })
 
-# Return experiment with given id
 @application.route('/experiment')
 def experiments():
     with Session.begin() as session:
-        # Get id from GET request
         id = request.args.get('id')
-        # Get experiment with given id
         experiment = session.query(Experiment).filter_by(id=id).first()
         print(experiment.item_list)
 
@@ -67,10 +63,8 @@ def experiments():
 @application.route('/api/search')
 def search():
     with Session.begin() as session:
-        # Get categories and items from GET request
         categories = request.args.getlist('category')
         items = [int(i) for i in request.args.getlist('item')]
-        # Get experiments with given categories and items
         experiments = None
         if categories:
             experiments = session.query(Experiment).filter(
@@ -79,13 +73,9 @@ def search():
         else:
             experiments = session.query(Experiment).all()
         exp_duplicate = experiments.copy()
-        # print(exp_duplicate)
-        # print(items)
-        # print(categories)
         for exp in exp_duplicate:
             for item in exp.item_list:
                 if items and item.id not in items:
-                    # print(exp.id, item.id)
                     experiments.remove(exp)
                     break
         return json.dumps({
