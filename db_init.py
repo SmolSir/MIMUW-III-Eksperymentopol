@@ -1,4 +1,4 @@
-from db_models import *
+from db_models import Category, Item, Experiment, Session, Base, engine
 import json
 
 Base.metadata.drop_all(engine)

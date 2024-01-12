@@ -1,6 +1,6 @@
 from flask import Flask, request, render_template
 from markupsafe import Markup
-from db_models import Category, Item, Experiment, Base, engine, Session
+from db_models import Category, Item, Experiment, Session
 
 import json
 
