@@ -85,12 +85,13 @@ def search():
             )
         else:
             experiments = session.query(Experiment).all()
-        exp_duplicate = experiments.copy()
-        for exp in exp_duplicate:
-            for item in exp.item_list:
-                if items and item.id not in items:
-                    experiments.remove(exp)
-                    break
+        if items:
+            experiments = filter(
+                lambda experiment: all(
+                    item.id in items for item in experiment.item_list
+                ),
+                experiments,
+            )
         return json.dumps(
             {
                 "experiment_list": [
