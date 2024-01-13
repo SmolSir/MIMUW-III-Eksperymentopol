@@ -1,4 +1,4 @@
-# [MIMUW-III-Eksperymentopol](https://students.mimuw.edu.pl/~bs429594/Eksperymentopol/)
+# [MIMUW-III-Eksperymentopol](https://mgr0dzicki.eu.pythonanywhere.com/)
 
 Main project for the MIMUW Ideas &amp; informatics course (winter 2023/24)
 
