@@ -231,9 +231,9 @@ function buildExperimentImagePart(imagePath) {
     const experimentImage = document.createElement("img");
 
     experimentImage.classList.add("rounded");
-    experimentImage.classList.add("img-fluid");
     experimentImage.classList.add("mb-2");
     experimentImage.classList.add("mb-lg-0");
+    experimentImage.classList.add("experiment-thumbnail");
     experimentImage.src = imagePath;
 
     experimentImageContainer.classList.add("col-lg-4");
