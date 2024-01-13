@@ -30,7 +30,6 @@ def experiments():
     with Session.begin() as session:
         id = request.args.get("id")
         experiment = session.query(Experiment).filter_by(id=id).first()
-        print(experiment.item_list)
 
         return render_template(
             "experiment.html",
@@ -42,31 +41,6 @@ def experiments():
             experiment_item_list=experiment.item_list,
             experiment_youtube_link=experiment.youtube_link,
         )
-
-
-# /backend/search?category=2&category=3&category=12&item=21&item=32&item=1212&item=312&item=132
-# {
-#     "experiment_list": [
-#         {
-#             "id": 69,
-#             "title": "Experiment 1",
-#             "short_description": "This is the first experiment",
-#             "image_path": "/static/experiment_images/69.png",
-#         },
-#         {
-#             "id": 70,
-#             "title": "Experiment 2",
-#             "short_description": "This is the second experiment",
-#             "image_path": "/static/experiment_images/70.png",
-#         },
-#         {
-#             "id": 71,
-#             "title": "Experiment 3",
-#             "short_description": "This is the third experiment",
-#             "image_path": "/static/experiment_images/71.png",
-#         },
-#     ]
-# }
 
 
 @application.route("/api/search")
