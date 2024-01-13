@@ -283,6 +283,52 @@ function buildExperiment(id, imagePath, shortDescription, title) {
     return experiment;
 }
 
+function buildSearchFailedMessageContent() {
+    const messageTextContainer = document.createElement("div");
+    const messageTextCard = document.createElement("div");
+    const messageTextHeader = document.createElement("h5");
+    const messageTextCardBody = document.createElement("div");
+    const messageText = document.createElement("p");
+
+    messageText.classList.add("card-text");
+    messageText.textContent = "\
+        Do wykonania większości eksperymentów potrzebnych jest kilka przedmiotów. \
+        Zaznacz na liście więcej przedmiotów lub wybierz dodatkowe kategorie. \
+        ";
+
+    messageTextCardBody.classList.add("card-body");
+    messageTextCardBody.appendChild(messageText);
+
+    messageTextHeader.classList.add("card-header");
+    messageTextHeader.textContent = "Nie znaleziono eksperymentów";
+
+    messageTextCard.classList.add("card");
+    messageTextCard.classList.add("text-center");
+    messageTextCard.appendChild(messageTextHeader);
+    messageTextCard.appendChild(messageTextCardBody);
+
+    messageTextContainer.classList.add("col");
+    messageTextContainer.appendChild(messageTextCard);
+
+    return messageTextContainer;
+}
+
+function buildSearchFailedMessage() {
+
+    const message = document.createElement("div");
+    const messageContainer = document.createElement("div");
+
+    messageContainer.classList.add("row");
+    messageContainer.classList.add("position-relative");
+    messageContainer.appendChild(buildSearchFailedMessageContent());
+
+    message.classList.add("experiments-list-item");
+    message.classList.add("mb-3");
+    message.appendChild(messageContainer);
+
+    return message;
+}
+
 
 /////////////////////////////
 //   LIST ENTRY BUILDERS   //
@@ -337,10 +383,8 @@ function buildExperimentList(experimentRecords) {
         experimentChildrenList.push(experiment);
     }
 
-    if (experimentRecords.length === 0) {
-        const noResults = document.createElement("p");
-        noResults.textContent = "Nie znaleziono eksperymentów spełniających podane kryteria.";
-        experimentChildrenList.push(noResults);
+    if (experimentChildrenList.length === 0) {
+        experimentChildrenList.push(buildSearchFailedMessage());
     }
 
     experimentList.replaceChildren(...experimentChildrenList);
