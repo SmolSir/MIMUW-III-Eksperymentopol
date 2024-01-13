@@ -1,4 +1,4 @@
-# [MIMUW-III-Eksperymentopol](https://mgr0dzicki.eu.pythonanywhere.com/?fbclid=IwAR0mfOxtOQ1-no1tLKtBS7aAtJ80LROtFODqpYw4E24GhjbNGHaP4-V4H6Y)
+# [MIMUW-III-Eksperymentopol](https://mgr0dzicki.eu.pythonanywhere.com/)
 
 Main project for the MIMUW Ideas &amp; informatics course (winter 2023/24)
 
